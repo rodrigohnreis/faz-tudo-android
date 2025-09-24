@@ -1,7 +1,8 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Signal, Game, BettingHouse } from "@/types";
 import { cn } from "@/lib/utils";
-import { Clock, TrendingUp } from "lucide-react";
+import { Clock, TrendingUp, ExternalLink } from "lucide-react";
 
 interface SignalCardProps {
   signal: Signal;
@@ -17,6 +18,22 @@ export const SignalCard = ({ signal, game, house, onClick, className }: SignalCa
     if (minutes < 1) return 'Agora';
     if (minutes === 1) return '1 min atrás';
     return `${minutes} min atrás`;
+  };
+
+  const handleRedirect = () => {
+    const confirmed = window.confirm(
+      `⚠️ AVISO IMPORTANTE:\n\n` +
+      `Você será redirecionado para ${house.name}.\n\n` +
+      `• Este aplicativo é apenas informativo\n` +
+      `• Aposte com responsabilidade\n` +
+      `• Você deve ter +18 anos\n` +
+      `• Jogos podem causar dependência\n\n` +
+      `Deseja continuar?`
+    );
+    
+    if (confirmed) {
+      window.open(house.url, '_blank');
+    }
   };
 
   const getSignalTypeColor = (type: Signal['type']) => {
@@ -95,10 +112,18 @@ export const SignalCard = ({ signal, game, house, onClick, className }: SignalCa
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="text-right">
+          <div className="text-right mr-3">
             <div className="text-xs text-muted-foreground">Multiplicador</div>
             <div className="text-lg font-bold text-hot">{game.multiplier}x</div>
           </div>
+          <Button
+            size="sm"
+            onClick={handleRedirect}
+            className="bg-success hover:bg-success/90 text-white"
+          >
+            <ExternalLink className="w-3 h-3 mr-1" />
+            Apostar
+          </Button>
         </div>
       </div>
     </Card>

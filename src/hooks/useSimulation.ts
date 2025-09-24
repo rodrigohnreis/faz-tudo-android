@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import { BettingHouse, Game, Signal, SimulationState } from '@/types';
 
 const HOUSES: Omit<BettingHouse, 'status' | 'payoutRate' | 'lastUpdate'>[] = [
-  { id: '1', name: 'Aposta Certa', logo: '🎯', color: '#FF6B6B' },
-  { id: '2', name: 'Ganho Rápido', logo: '⚡', color: '#4ECDC4' },
-  { id: '3', name: 'Sorte Grande', logo: '🍀', color: '#45B7D1' },
-  { id: '4', name: 'Mega Bet', logo: '💎', color: '#F7B731' },
-  { id: '5', name: 'Super Casa', logo: '🏆', color: '#5F27CD' },
+  { id: '1', name: 'Bet365', logo: '🎯', color: '#FF6B6B', url: 'https://www.bet365.com' },
+  { id: '2', name: 'Betano', logo: '⚡', color: '#4ECDC4', url: 'https://www.betano.com' },
+  { id: '3', name: 'Sportingbet', logo: '🍀', color: '#45B7D1', url: 'https://www.sportingbet.com' },
+  { id: '4', name: '1xBet', logo: '💎', color: '#F7B731', url: 'https://1xbet.com' },
+  { id: '5', name: 'Betfair', logo: '🏆', color: '#5F27CD', url: 'https://www.betfair.com' },
 ];
 
 const GAMES: Game[] = [

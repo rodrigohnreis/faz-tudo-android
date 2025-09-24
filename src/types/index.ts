@@ -6,6 +6,7 @@ export interface BettingHouse {
   payoutRate: number;
   lastUpdate: Date;
   color: string;
+  url: string;
 }
 
 export interface Game {
