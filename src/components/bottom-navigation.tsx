@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
-import { Home, Gamepad2, TrendingUp, Settings } from "lucide-react";
+import { Home, Gamepad2, TrendingUp, Crown, Settings } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 
 const navigationItems = [
   { icon: Home, label: 'Início', path: '/' },
   { icon: Gamepad2, label: 'Jogos', path: '/games' },
   { icon: TrendingUp, label: 'Sinais', path: '/signals' },
+  { icon: Crown, label: 'VIP', path: '/vip-signals' },
   { icon: Settings, label: 'Config', path: '/settings' },
 ];
 
