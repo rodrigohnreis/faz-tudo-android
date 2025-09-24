@@ -15,6 +15,12 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // SinaisVIP specific variants
+        hot: "bg-gradient-hot text-white hover:shadow-elevated transform hover:scale-105 transition-all duration-200",
+        cold: "bg-cold text-white hover:bg-cold/80",
+        success: "bg-success text-white hover:bg-success/90",
+        warning: "bg-warning text-black hover:bg-warning/90",
+        gradient: "bg-gradient-primary text-white hover:shadow-elevated transform hover:scale-[1.02] transition-all duration-200",
       },
       size: {
         default: "h-10 px-4 py-2",

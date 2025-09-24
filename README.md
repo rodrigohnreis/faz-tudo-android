@@ -1,73 +1,129 @@
-# Welcome to your Lovable project
+# SinaisVIP - Aplicativo de Sinais Simulados
 
-## Project info
+## 📱 Sobre o App
 
-**URL**: https://lovable.dev/projects/38e09b35-f25e-43ec-a159-3cb0afde2df5
+O **SinaisVIP** é um aplicativo Android de sinais simulados de apostas, desenvolvido com React, TypeScript e Capacitor. O app simula a experiência de plataformas de sinais de apostas com interface profissional e dados em tempo real.
 
-## How can I edit this code?
+### ✨ Funcionalidades
 
-There are several ways of editing your application.
+- **Dashboard em Tempo Real**: Visualize casas "quentes" e sinais ativos
+- **Simulação Realística**: Lógica de flutuação de taxas de pagamento das casas
+- **Tipos de Sinais**: Momento Ouro, Sequência Bônus e Padrão Vitória
+- **Interface Profissional**: Design inspirado em apps reais com tema vermelho/escuro
+- **Jogos Simulados**: Tigrinho, Coelhinho, Macaco e outros com multiplicadores
+- **Atualização Automática**: Dados atualizados a cada 30 segundos
 
-**Use Lovable**
+### 🎮 Jogos Disponíveis
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/38e09b35-f25e-43ec-a159-3cb0afde2df5) and start prompting.
+- 🐅 **Tigrinho** - O clássico jogo do tigre
+- 🐰 **Coelhinho da Sorte** - Pulos de sorte e fortuna  
+- 🐵 **Macaco Milionário** - Travessuras que pagam
+- 🦁 **Leão Dourado** - O rei dos ganhos
+- 🐘 **Elefante da Sorte** - Memória de vitórias
+- 🦜 **Papagaio Premiado** - Repete os ganhos
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🏢 Casas de Apostas Simuladas
 
-**Use your preferred IDE**
+- 🎯 **Aposta Certa**
+- ⚡ **Ganho Rápido** 
+- 🍀 **Sorte Grande**
+- 💎 **Mega Bet**
+- 🏆 **Super Casa**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Como Gerar o APK Android
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Pré-requisitos
 
-Follow these steps:
+- Node.js instalado
+- Android Studio instalado
+- Git configurado
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Passos para Gerar APK
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. **Clone o projeto do GitHub:**
+   ```bash
+   git clone <URL_DO_SEU_REPOSITORIO>
+   cd sinaisvip-app
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+3. **Adicione a plataforma Android:**
+   ```bash
+   npx cap add android
+   ```
+
+4. **Atualize as dependências nativas:**
+   ```bash
+   npx cap update android
+   ```
+
+5. **Compile o projeto:**
+   ```bash
+   npm run build
+   ```
+
+6. **Sincronize com o Capacitor:**
+   ```bash
+   npx cap sync
+   ```
+
+7. **Abra o projeto no Android Studio:**
+   ```bash
+   npx cap run android
+   ```
+
+8. **No Android Studio:**
+   - Aguarde a sincronização do Gradle
+   - Vá em `Build > Generate Signed Bundle / APK`
+   - Selecione `APK` e siga as instruções
+   - O APK será gerado na pasta `app/build/outputs/apk/`
+
+### 📱 Testando no Dispositivo
+
+Para testar diretamente no dispositivo físico:
+
+```bash
+npx cap run android --target=<DEVICE_ID>
 ```
 
-**Edit a file directly in GitHub**
+Para listar dispositivos conectados:
+```bash
+adb devices
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🛠️ Tecnologias Utilizadas
 
-**Use GitHub Codespaces**
+- **React 18** - Interface de usuário
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Estilização
+- **Shadcn/ui** - Componentes UI
+- **Capacitor** - Framework para mobile
+- **Vite** - Build tool
+- **React Router** - Navegação
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🎨 Design System
 
-## What technologies are used for this project?
+O app utiliza um design system baseado em:
 
-This project is built with:
+- **Cores Principais**: Vermelho escuro (#8B0000) e Crimson (#DC143C)
+- **Fundo**: Tema escuro (#1C1C1E)
+- **Status HOT**: Coral vermelho (#FF6B6B)
+- **Status FRIO**: Cinza (#6C757D)
+- **Animações**: Transições suaves e micro-interações
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## ⚠️ Importante
 
-## How can I deploy this project?
+Este é um aplicativo de **simulação educacional**. Todos os sinais, casas de apostas e dados são **fictícios** e gerados algoritmicamente para fins de demonstração.
 
-Simply open [Lovable](https://lovable.dev/projects/38e09b35-f25e-43ec-a159-3cb0afde2df5) and click on Share -> Publish.
+## 📞 Suporte
 
-## Can I connect a custom domain to my Lovable project?
+Para dúvidas sobre mobile development com Capacitor, consulte:
+[Blog post sobre desenvolvimento mobile](https://lovable.dev/blogs/TODO)
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+**SinaisVIP** - Experiência realística de sinais simulados 📱✨
