@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff, TrendingUp, Check } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,8 @@ export const Register = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -47,21 +50,42 @@ export const Register = () => {
       return;
     }
 
+    if (formData.password.length < 6) {
+      toast({
+        title: "Senha muito curta",
+        description: "A senha deve ter pelo menos 6 caracteres.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      // TODO: Implementar cadastro com Supabase
+      const { error } = await signUp(formData.email, formData.password, formData.name);
+      
+      if (error) {
+        toast({
+          title: "Erro no cadastro",
+          description: error.message || "Tente novamente.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
       toast({
         title: "Cadastro realizado com sucesso!",
-        description: "Bem-vindo ao SinaisVIP!",
+        description: "Escolha seu plano para começar!",
       });
+      
+      navigate("/plans");
     } catch (error) {
       toast({
         title: "Erro no cadastro",
         description: "Tente novamente em alguns instantes.",
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };

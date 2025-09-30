@@ -15,6 +15,8 @@ import { Checkout } from "./pages/Checkout";
 import { Landing } from "./pages/Landing";
 import { BottomNavigation } from "./components/bottom-navigation";
 import NotFound from "./pages/NotFound";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -24,23 +26,27 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="relative">
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="/signals" element={<Signals />} />
-            <Route path="/vip-signals" element={<VipSignals />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/plans" element={<Plans />} />
-            <Route path="/checkout/:planId" element={<Checkout />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <BottomNavigation />
-        </div>
+        <AuthProvider>
+          <div className="relative">
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/plans" element={<Plans />} />
+              
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/games" element={<ProtectedRoute feature="games"><Games /></ProtectedRoute>} />
+              <Route path="/signals" element={<ProtectedRoute feature="signals"><Signals /></ProtectedRoute>} />
+              <Route path="/vip-signals" element={<ProtectedRoute feature="vip-signals"><VipSignals /></ProtectedRoute>} />
+              <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+              <Route path="/checkout/:planId" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+              
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <BottomNavigation />
+          </div>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -12,14 +12,40 @@ import {
   Settings as SettingsIcon,
   HelpCircle,
   LogOut,
-  User
+  User,
+  Crown
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Badge } from "@/components/ui/badge";
 
 export const Settings = () => {
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [vibration, setVibration] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const { user, profile, signOut } = useAuth();
+
+  const getPlanBadgeColor = (plan: string) => {
+    switch (plan) {
+      case 'vip':
+        return 'bg-warning text-warning-foreground';
+      case 'premium':
+        return 'bg-primary text-primary-foreground';
+      default:
+        return 'bg-secondary text-secondary-foreground';
+    }
+  };
+
+  const getPlanName = (plan: string) => {
+    switch (plan) {
+      case 'vip':
+        return 'VIP Diamond';
+      case 'premium':
+        return 'Premium';
+      default:
+        return 'Básico';
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -38,17 +64,34 @@ export const Settings = () => {
         {/* Profile Section */}
         <Card className="p-4">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
-              <User className="w-6 h-6 text-white" />
+            <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center">
+              <User className="w-8 h-8 text-white" />
             </div>
-            <div>
-              <h3 className="font-semibold text-foreground">Usuário</h3>
-              <p className="text-sm text-muted-foreground">user@example.com</p>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="font-semibold text-foreground">
+                  {profile?.full_name || 'Usuário'}
+                </h3>
+                {profile && (
+                  <Badge className={getPlanBadgeColor(profile.plan)}>
+                    {profile.plan === 'vip' && <Crown className="w-3 h-3 mr-1" />}
+                    {getPlanName(profile.plan)}
+                  </Badge>
+                )}
+              </div>
+              <p className="text-sm text-muted-foreground">{user?.email}</p>
+              {profile?.plan_expires_at && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Plano válido até {new Date(profile.plan_expires_at).toLocaleDateString('pt-BR')}
+                </p>
+              )}
             </div>
           </div>
-          <Button variant="outline" size="sm">
-            Editar Perfil
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" className="flex-1" onClick={() => window.location.href = '/plans'}>
+              Fazer Upgrade
+            </Button>
+          </div>
         </Card>
 
         {/* Notifications */}
@@ -178,7 +221,7 @@ export const Settings = () => {
 
         {/* Logout */}
         <Card className="p-4">
-          <Button variant="destructive" className="w-full">
+          <Button variant="destructive" className="w-full" onClick={signOut}>
             <LogOut className="w-4 h-4 mr-2" />
             Sair da Conta
           </Button>

@@ -22,13 +22,13 @@ interface Plan {
 
 const plans: Plan[] = [
   {
-    id: "basic",
+    id: "basico",
     name: "Básico",
     description: "Ideal para iniciantes",
-    price: 29.90,
-    duration: "7 dias",
+    price: 9.99,
+    duration: "30 dias",
     features: [
-      "Sinais básicos diários",
+      "Acesso aos jogos",
       "Análise de 3 casas de apostas",
       "Suporte via WhatsApp",
       "Alertas em tempo real"
@@ -40,17 +40,16 @@ const plans: Plan[] = [
     id: "premium",
     name: "Premium",
     description: "Mais sinais e recursos",
-    price: 79.90,
-    originalPrice: 99.90,
+    price: 19.99,
     duration: "30 dias",
     popular: true,
     features: [
+      "Acesso aos jogos",
       "Sinais premium exclusivos",
       "Análise de todas as casas",
       "Suporte prioritário 24/7",
       "Alertas personalizados",
-      "Histórico de performance",
-      "Grupo VIP no Telegram"
+      "Histórico de performance"
     ],
     color: "from-primary to-secondary",
     icon: <Star className="w-6 h-6" />
@@ -59,19 +58,17 @@ const plans: Plan[] = [
     id: "vip",
     name: "VIP Diamond",
     description: "Para profissionais",
-    price: 149.90,
-    originalPrice: 199.90,
+    price: 49.99,
     duration: "30 dias",
     premium: true,
     features: [
       "Todos os recursos Premium",
-      "Sinais VIP exclusivos",
+      "Sinais VIP exclusivos (85%+)",
+      "Acesso total à plataforma",
       "Análise técnica avançada",
       "Calls ao vivo diárias",
       "Suporte 1 a 1",
-      "Garantia de resultado",
-      "Acesso vitalício ao grupo",
-      "Bônus: E-book estratégias"
+      "Garantia de resultado"
     ],
     color: "from-warning to-warning/80",
     icon: <Crown className="w-6 h-6" />
