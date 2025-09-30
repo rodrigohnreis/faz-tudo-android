@@ -14,7 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      payments: {
+        Row: {
+          amount: number
+          created_at: string | null
+          id: string
+          payment_id: string | null
+          pix_code: string | null
+          pix_qr_code: string | null
+          plan: Database["public"]["Enums"]["user_plan"]
+          status: Database["public"]["Enums"]["payment_status"] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          id?: string
+          payment_id?: string | null
+          pix_code?: string | null
+          pix_qr_code?: string | null
+          plan: Database["public"]["Enums"]["user_plan"]
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          id?: string
+          payment_id?: string | null
+          pix_code?: string | null
+          pix_qr_code?: string | null
+          plan?: Database["public"]["Enums"]["user_plan"]
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          plan: Database["public"]["Enums"]["user_plan"] | null
+          plan_expires_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          plan?: Database["public"]["Enums"]["user_plan"] | null
+          plan_expires_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          plan?: Database["public"]["Enums"]["user_plan"] | null
+          plan_expires_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +102,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      payment_status: "pending" | "approved" | "rejected" | "cancelled"
+      user_plan: "basico" | "premium" | "vip"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +230,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      payment_status: ["pending", "approved", "rejected", "cancelled"],
+      user_plan: ["basico", "premium", "vip"],
+    },
   },
 } as const
