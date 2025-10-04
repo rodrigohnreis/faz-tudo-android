@@ -13,6 +13,7 @@ import { Register } from "./pages/Register";
 import { Plans } from "./pages/Plans";
 import { Checkout } from "./pages/Checkout";
 import { Landing } from "./pages/Landing";
+import { Admin } from "./pages/Admin";
 import { BottomNavigation } from "./components/bottom-navigation";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -40,6 +41,7 @@ const App = () => (
               <Route path="/vip-signals" element={<ProtectedRoute feature="vip-signals"><VipSignals /></ProtectedRoute>} />
               <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
               <Route path="/checkout/:planId" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+              <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
               
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

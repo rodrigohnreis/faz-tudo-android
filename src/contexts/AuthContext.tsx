@@ -17,6 +17,7 @@ interface AuthContextType {
   session: Session | null;
   profile: Profile | null;
   loading: boolean;
+  isAdmin: boolean;
   signUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
@@ -30,6 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,8 +75,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (error) throw error;
       setProfile(data);
+
+      // Check if user is admin
+      const { data: roleData } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .eq('role', 'admin')
+        .single();
+
+      setIsAdmin(!!roleData);
     } catch (error) {
       console.error('Error fetching profile:', error);
+      setIsAdmin(false);
     }
   };
 
@@ -111,6 +124,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signOut = async () => {
     await supabase.auth.signOut();
     setProfile(null);
+    setIsAdmin(false);
     navigate('/');
   };
 
@@ -144,7 +158,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         user, 
         session, 
         profile, 
-        loading, 
+        loading,
+        isAdmin, 
         signUp, 
         signIn, 
         signOut, 

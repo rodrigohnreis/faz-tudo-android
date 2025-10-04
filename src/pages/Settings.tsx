@@ -13,17 +13,20 @@ import {
   HelpCircle,
   LogOut,
   User,
-  Crown
+  Crown,
+  Lock
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 export const Settings = () => {
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [vibration, setVibration] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, signOut, isAdmin } = useAuth();
+  const navigate = useNavigate();
 
   const getPlanBadgeColor = (plan: string) => {
     switch (plan) {
@@ -218,6 +221,20 @@ export const Settings = () => {
             </Button>
           </div>
         </Card>
+
+        {/* Admin Access */}
+        {isAdmin && (
+          <Card className="p-4">
+            <Button 
+              variant="default" 
+              className="w-full bg-warning hover:bg-warning/90" 
+              onClick={() => navigate('/admin')}
+            >
+              <Lock className="w-4 h-4 mr-2" />
+              Painel Admin
+            </Button>
+          </Card>
+        )}
 
         {/* Logout */}
         <Card className="p-4">
